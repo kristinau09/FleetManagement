@@ -17,7 +17,8 @@ public class Vehicle {
 	private String currentPosition; //latitude and longitude of that vehicle
 	private String currentDriver;
 	
-	
+	/*For Hibernate*/
+	public Vehicle() {}
 	
 	public String getVehicleName() {
 		return vehicleName;

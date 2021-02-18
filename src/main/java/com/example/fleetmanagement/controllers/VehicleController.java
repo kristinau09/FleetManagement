@@ -48,6 +48,11 @@ public class VehicleController {
 	@RequestMapping(value = "/list.html", method = RequestMethod.GET)
 	public ModelAndView listAllVehicles() {
 		List<Vehicle> listAllVehicles = dao.findAll();
+		
+		Vehicle newVehicle = new Vehicle();
+		newVehicle.setVehicleName("Cyber Truck");
+		listAllVehicles.add(newVehicle);
+		
 		return new ModelAndView("allVehicles", "vehicles", listAllVehicles);
 	}
 
@@ -58,9 +63,10 @@ public class VehicleController {
 	@RequestMapping(value = "/vehicle/{name}")
 	public ModelAndView showVehicleByName(@PathVariable("name") String name) {
 		
-		throw new UnsupportedOperationException(); //for now
+		//search vehicle
+		Vehicle vehicleName = dao.findByVehicleName(name);
+		return new ModelAndView("vehicleInfo", "vehicle", vehicleName);
 		
-		// TODO
 	}
 
 }
