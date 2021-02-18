@@ -47,12 +47,8 @@ public class VehicleController {
 	
 	@RequestMapping(value = "/list.html", method = RequestMethod.GET)
 	public ModelAndView listAllVehicles() {
-		List<Vehicle> listAllVehicles = dao.findAll();
 		
-		Vehicle newVehicle = new Vehicle();
-		newVehicle.setVehicleName("Cyber Truck");
-		listAllVehicles.add(newVehicle);
-		
+		List<Vehicle> listAllVehicles = dao.findAll();		
 		return new ModelAndView("allVehicles", "vehicles", listAllVehicles);
 	}
 

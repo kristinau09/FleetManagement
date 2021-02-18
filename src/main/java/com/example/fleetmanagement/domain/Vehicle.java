@@ -16,6 +16,7 @@ public class Vehicle {
 	private String status; //status of the vehicle 
 	private String currentPosition; //latitude and longitude of that vehicle
 	private String currentDriver;
+	private String vin; //vehicle identification number
 	
 	/*For Hibernate*/
 	public Vehicle() {}
@@ -60,10 +61,18 @@ public class Vehicle {
 		this.currentDriver = currentDriver;
 	}
 
+	public String getVin() {
+		return vin;
+	}
+
+	public void setVin(String vin) {
+		this.vin = vin;
+	}
+
 	@Override
 	public String toString() {
-		return "Vehicle [id=" + id + ", vehicleName=" + vehicleName + ", odometer=" + odometer + ", status=" + status
-				+ ", currentPosition=" + currentPosition + ", currentDriver=" + currentDriver + "]";
+		return "Vehicle [id=" + id + ", vehicle Name=" + vehicleName + ", odometer=" + odometer + ", status=" + status
+				+ ", current Position=" + currentPosition + ", current Driver=" + currentDriver + ", , vehicle identification number=" + vin + "]";
 	}
 
 		
