@@ -1,5 +1,8 @@
 package com.example.fleetmanagement.domain;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,13 +17,15 @@ public class Vehicle {
 	private String vehicleName;
 	private int odometer; //measure the distance of vehicle travel in its lifetime
 	private String status; //status of the vehicle 
-	private String currentPosition; //latitude and longitude of that vehicle
+	private BigDecimal latitute;
+	private BigDecimal longitude;
+	private Date lastRecordedPosition;
 	private String currentDriver;
 	private String vin; //vehicle identification number
 	
 	/*For HiberNate*/
-	public Vehicle() {}	
-	
+	public Vehicle() {}
+
 	public long getId() {
 		return id;
 	}
@@ -28,7 +33,6 @@ public class Vehicle {
 	public void setId(long id) {
 		this.id = id;
 	}
-
 
 	public String getVehicleName() {
 		return vehicleName;
@@ -54,18 +58,34 @@ public class Vehicle {
 		this.status = status;
 	}
 
-	public String getCurrentPosition() {
-		return currentPosition;
+	public BigDecimal getLatitute() {
+		return latitute;
 	}
 
-	public void setCurrentPosition(String currentPosition) {
-		this.currentPosition = currentPosition;
+	public void setLatitute(BigDecimal latitute) {
+		this.latitute = latitute;
+	}
+
+	public BigDecimal getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(BigDecimal longitude) {
+		this.longitude = longitude;
+	}
+
+	public Date getLastRecordedPosition() {
+		return lastRecordedPosition;
+	}
+
+	public void setLastRecordedPosition(Date lastRecordedPosition) {
+		this.lastRecordedPosition = lastRecordedPosition;
 	}
 
 	public String getCurrentDriver() {
 		return currentDriver;
 	}
-	
+
 	public void setCurrentDriver(String currentDriver) {
 		this.currentDriver = currentDriver;
 	}
@@ -81,9 +101,10 @@ public class Vehicle {
 	@Override
 	public String toString() {
 		return "Vehicle [id=" + id + ", vehicleName=" + vehicleName + ", odometer=" + odometer + ", status=" + status
-				+ ", current Position=" + currentPosition + ", current Driver=" + currentDriver + ", , vehicle identification number=" + vin + "]";
-	}
-
-		
+				+ ", latitute=" + latitute + ", longitude=" + longitude + ", lastRecordedPosition="
+				+ lastRecordedPosition + ", currentDriver=" + currentDriver + ", vin=" + vin + "]";
+	}	
+	
+	
 
 }

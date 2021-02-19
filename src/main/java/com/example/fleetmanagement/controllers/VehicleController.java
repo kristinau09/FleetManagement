@@ -1,12 +1,16 @@
 package com.example.fleetmanagement.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.fleetmanagement.dao.VehicleRepository;
@@ -42,6 +46,15 @@ public class VehicleController {
 	}
 	
 	/*
+	 * Delete Vehicle
+	 */
+	@RequestMapping(value = "/deleteVehicle.html", method = RequestMethod.POST)
+	public String deleteVehicle(@RequestParam Long id) {
+		dao.deleteById(id);
+		return "redirect:/website/vehicles/list.html";
+	}
+	
+	/*
 	 * Listing all vehicles 
 	*/
 	
@@ -56,12 +69,30 @@ public class VehicleController {
 	 *  Search vehicles by its name 
 	*/
 	
-	@RequestMapping(value = "/vehicle/{name}")
-	public ModelAndView showVehicleByName(@PathVariable("name") String name) {
+	@RequestMapping(value = "/vehicle/{vehicleName}")
+	public ModelAndView showVehicleByName(@PathVariable("vehicleName") String vehicleName) {
 		
 		//search vehicle
-		Vehicle vehicleName = dao.findByVehicleName(name);
-		return new ModelAndView("vehicleInfo", "vehicle", vehicleName);
+		Vehicle vName = dao.findByVehicleName(vehicleName);
+		
+		//get the current position for this vehicle from the microservice
+		RestTemplate restTemplate = new RestTemplate();
+		//making a rest request of current position of that vehicle
+		PositionOfVehicle response = restTemplate.getForObject("http://localhost:8090/vehicles/" + vehicleName, PositionOfVehicle.class);
+		
+		//put position and vehicle into the map
+		Map<String, Object> model = new HashMap<>();
+		model.put("vehicle", vName);
+		model.put("position", response);
+		return new ModelAndView("vehicleInfo", "model", model);
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 
