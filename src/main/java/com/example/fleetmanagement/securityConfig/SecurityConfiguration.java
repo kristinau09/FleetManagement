@@ -1,6 +1,7 @@
 package com.example.fleetmanagement.securityConfig;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
+@Profile("development")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	//Authentication
@@ -15,7 +17,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
 		auth.inMemoryAuthentication().withUser("rac") //user name
-									 .password("{noop}secret") //temp password //password("{noop}password")
+									 .password("{noop}secret") //temp password
 		                             .roles("USER","ADMIN"); //roles user has									
 	}	
 	

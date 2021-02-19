@@ -18,7 +18,7 @@ public class Vehicle {
 	private String currentDriver;
 	private String vin; //vehicle identification number
 	
-	/*For Hibernate*/
+	/*For HiberNate*/
 	public Vehicle() {}
 	
 	public String getVehicleName() {
