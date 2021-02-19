@@ -19,8 +19,17 @@ public class Vehicle {
 	private String vin; //vehicle identification number
 	
 	/*For HiberNate*/
-	public Vehicle() {}
+	public Vehicle() {}	
 	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
 	public String getVehicleName() {
 		return vehicleName;
 	}
@@ -71,7 +80,7 @@ public class Vehicle {
 
 	@Override
 	public String toString() {
-		return "Vehicle [id=" + id + ", vehicle Name=" + vehicleName + ", odometer=" + odometer + ", status=" + status
+		return "Vehicle [id=" + id + ", vehicleName=" + vehicleName + ", odometer=" + odometer + ", status=" + status
 				+ ", current Position=" + currentPosition + ", current Driver=" + currentDriver + ", , vehicle identification number=" + vin + "]";
 	}
 

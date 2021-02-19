@@ -7,19 +7,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.example.fleetmanagement.domain.Vehicle;
 
-@XmlRootElement(name="vehicles") //rendering vehicle list as xml and outermost tag will be vehicles
+@XmlRootElement(name="vehicle") //rendering vehicle list as outermost tag for xml will be vehicles
 public class VehicleList {
 	
 	private List<Vehicle> vehicles;
 	
-	//for HiberNate
 	public VehicleList() {}
 	
 	public VehicleList(List<Vehicle> vehicles) {
 		this.vehicles=vehicles;
-	}
-
-	
+	}	
 
 	@XmlElement(name="vehicle") //without singular vehicle tag, this method would return whatever it finds which would be vehicles
 	public List<Vehicle> getVehicles() {

@@ -10,7 +10,7 @@
 	
 		<h1><strong>Welcome to FleetManagement</strong></h1>
 						
-		<c:url value="/login" var="loginUrl"/>
+		<c:url value="/website/login" var="loginUrl"/>
 		
 		<c:if test="${param.error != null}">
 			<p>Bad username/password</p>
