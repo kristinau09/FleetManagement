@@ -15,7 +15,7 @@ import com.example.fleetmanagement.dao.VehicleRepository;
 import com.example.fleetmanagement.domain.Vehicle;
 
 @RestController
-
+@RequestMapping("/")
 public class VehicleRestController {
 	
 	@Autowired
@@ -33,7 +33,7 @@ public class VehicleRestController {
 	 * object, in this case it would be a vehicle.
 	 */
 	
-	@RequestMapping(value="/vehicles", method=RequestMethod.POST, produces=MediaType.APPLICATION_XML_VALUE)
+	@RequestMapping(value="/vehicles", method=RequestMethod.POST)
 	public ResponseEntity<Vehicle> createNewVehicle(@RequestBody Vehicle vehicle) { 		
 		
 		System.out.println(vehicle.toString());

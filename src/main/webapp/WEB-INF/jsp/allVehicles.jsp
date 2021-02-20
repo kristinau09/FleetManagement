@@ -5,6 +5,6 @@
 
 <ul>
 <c:forEach items="${vehicles}" var="vehicle">
-   <li>${vehicle}</li>
+      <li><a href="<c:url value="/website/vehicles/vehicle/${vehicle.vehicleName}"/>">${vehicle}</a></li>
 </c:forEach>
 </ul>

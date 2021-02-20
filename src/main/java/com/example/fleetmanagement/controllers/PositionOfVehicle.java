@@ -8,14 +8,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class PositionOfVehicle {
 	
-	private BigDecimal latitute;
+	private BigDecimal latitude;
 	private BigDecimal longitude;
 	private Date timeStamp;
-	public BigDecimal getLatitute() {
-		return latitute;
+	
+	public BigDecimal getlatitude() {
+		return latitude;
 	}
-	public void setLatitute(BigDecimal latitute) {
-		this.latitute = latitute;
+	public void setlatitude(BigDecimal latitude) {
+		this.latitude = latitude;
 	}
 	public BigDecimal getLongitude() {
 		return longitude;

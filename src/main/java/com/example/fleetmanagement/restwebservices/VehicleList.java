@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.example.fleetmanagement.domain.Vehicle;
 
-@XmlRootElement(name="vehicle") //rendering vehicle list as outermost tag for xml will be vehicles
+@XmlRootElement(name="vehicles") //rendering vehicle list as outermost tag for xml will be vehicles
 public class VehicleList {
 	
 	private List<Vehicle> vehicles;
