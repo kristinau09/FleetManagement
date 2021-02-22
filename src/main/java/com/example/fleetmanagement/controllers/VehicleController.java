@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,9 @@ public class VehicleController {
 	
 	@Autowired
 	private VehicleRepository dao;
+	
+	@Autowired
+	private DiscoveryClient discoveryClient;
 
 	/* 
 	 * Presenting the initial form to the user
@@ -77,8 +82,19 @@ public class VehicleController {
 		
 		//get the current position for this vehicle from the microservice
 		RestTemplate restTemplate = new RestTemplate();
+		
+		//call discoveryService client and ask for the location of specified microservice
+		List<ServiceInstance> instances = discoveryClient.getInstances("fleetman-position-tracker");
+		ServiceInstance service = instances.get(0);
+		
+		if(service==null) {
+			//service has crashed
+			throw new RuntimeException("Position tracker has crashed!");
+		}
+		String physicalLocation = service.getUri().toString();
+		
 		//making a rest request of current position of that vehicle
-		PositionOfVehicle response = restTemplate.getForObject("http://localhost:8090/vehicles/" + vehicleName, PositionOfVehicle.class);
+		PositionOfVehicle response = restTemplate.getForObject(physicalLocation + "/vehicles/" + vehicleName, PositionOfVehicle.class);
 		
 		//put position and vehicle into the map
 		Map<String, Object> model = new HashMap<>();
