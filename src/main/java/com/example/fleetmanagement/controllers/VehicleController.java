@@ -23,9 +23,7 @@ import com.example.fleetmanagement.domain.Vehicle;
 public class VehicleController {
 	
 	@Autowired
-	private VehicleRepository dao;
-	
-	
+	private VehicleRepository dao;	
 	
 	/*
 	 * this object will call eureka, and when it gets more than one instance back
