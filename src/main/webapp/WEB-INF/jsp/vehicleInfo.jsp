@@ -14,6 +14,8 @@
 	<p>The last report for this vehicle was at ${model.position.timeStamp}</p>
 	
 	<p>It was at lat long ${model.position.latitude}, ${model.position.longitude}</p>
+	
+	<p>You were served by port ${model.port}</p>
 
     <div id="map"></div>
     <script>
@@ -36,7 +38,7 @@
    
     </script>
     <script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPX12owgwjFmZZUn_F2yJ3Ug1brlaAEbY&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuCKFDFOQBuL8OUwxIzustoTuKp8249z4&callback=initMap">
     </script>
   </body>
 </html>

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +25,15 @@ public class VehicleController {
 	@Autowired
 	private VehicleRepository dao;
 	
+	
+	
+	/*
+	 * this object will call eureka, and when it gets more than one instance back
+	 * from Eureka this object contains the intelligence to choose one of those
+	 * instances, not randomly, but using algorithm called round robin algorithm
+	 */
 	@Autowired
-	private DiscoveryClient discoveryClient;
-
+	private LoadBalancerClient balancer;
 	/* 
 	 * Presenting the initial form to the user
 	 */
@@ -83,23 +89,26 @@ public class VehicleController {
 		//get the current position for this vehicle from the microservice
 		RestTemplate restTemplate = new RestTemplate();
 		
-		//call discoveryService client and ask for the location of specified microservice
-		List<ServiceInstance> instances = discoveryClient.getInstances("fleetman-position-tracker");
-		ServiceInstance service = instances.get(0);
-		
-		if(service==null) {
+		ServiceInstance service = balancer.choose("fleetman-position-tracker");
+		if(service == null) {
 			//service has crashed
 			throw new RuntimeException("Position tracker has crashed!");
 		}
+		
+		//call uri which returns the physical address where the service is located
 		String physicalLocation = service.getUri().toString();
 		
 		//making a rest request of current position of that vehicle
 		PositionOfVehicle response = restTemplate.getForObject(physicalLocation + "/vehicles/" + vehicleName, PositionOfVehicle.class);
 		
+		//get the port number where service in action for testing purpose
+		int port = service.getPort();
+		
 		//put position and vehicle into the map
 		Map<String, Object> model = new HashMap<>();
 		model.put("vehicle", vName);
 		model.put("position", response);
+		model.put("port", port);
 		return new ModelAndView("vehicleInfo", "model", model);
 		
 		
