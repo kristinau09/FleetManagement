@@ -38,7 +38,7 @@
    
     </script>
     <script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuCKFDFOQBuL8OUwxIzustoTuKp8249z4&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?<API key>&callback=initMap">
     </script>
   </body>
 </html>
